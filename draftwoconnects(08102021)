@@ -1,0 +1,122 @@
+class Vaccines{
+    public String name;
+    public int doses;
+    public int gap;
+
+    public Vaccines(String name, int doses, int gap){
+        this.name = name;
+        this.doses = doses;
+        this.gap = gap;
+    }
+
+    public String toString(){
+        return "Name: "+ name + "\n" + "Doses: " + doses + "\n" + "Gap between doses: "+ gap + "\n";
+    }
+}
+
+class Vtest{ // addVaccines
+    public static void main(String[] args){
+        Vaccines vac[] = new Vaccines[2];
+        vac[0] = new Vaccines("Covi", 2, 3);
+        vac[1] = new Vaccines("Covax", 1, 0);
+
+        for (Vaccines i : vac) {
+            System.out.println(i);
+        }
+    }
+}
+
+class Hospitals{
+    public String name;
+    public int pincode;
+    private int ID;
+
+    public Hospitals(String name, int pincode){
+        this.name = name;
+        this.pincode = pincode;
+    }
+
+    public int setID(){
+        ID = 100000 + (int)(Math.random()*999999);
+        return ID;
+    }
+    
+
+    public String toString(){
+        return "Name: "+ name + "\n" + "Pincode: " + pincode + "\n" + "ID: "+ setID() + "\n";
+    }
+}
+
+class Htest{ // addHospitals
+    public static void main(String[] args){
+        Hospitals hos[] = new Hospitals[2];
+        hos[0] = new Hospitals("Medistar", 110091);
+        hos[1] = new Hospitals("Apollo", 110016);
+
+        for (Hospitals i : hos) {
+            System.out.println(i);
+        }
+    }
+}
+
+class Citizens{
+    public String name;
+    public int age;
+    public String aadhar; // change
+
+    public Citizens(String name, int age, String aadhar){
+        this.name = name;
+        this.age = age;
+        this.aadhar = aadhar;
+    }
+
+    public String toString(){
+        if (age > 18){
+            return "REGISTERED";
+        } else{
+            return "AGE BARRIER 18";
+        }
+    }
+}
+
+class Ctest{ // addHospitals
+    public static void main(String[] args){
+        Citizens cit[] = new Citizens[2];
+        cit[0] = new Citizens("Arnav", 18, "123456789098");
+        cit[1] = new Citizens("Sahas", 19, "123456789012");
+
+        for (Citizens i : cit) {
+            System.out.println(i);
+        }
+    }
+}
+
+class Slots{
+    public int ID;
+    public int day;
+    public int quantity;
+    public String type;
+
+    public Slots(int ID, int day, int quantity, String type){
+        this.ID = ID;
+        this.day = day;
+        this.quantity = quantity;
+        this.type = type;
+    }
+
+    public String toString(){
+        return "ID: "+ ID + "\n" + "Day: " + day + "\n" + "Quantity: "+ quantity + "\n" + "Vaccine: " + type + "\n";
+    }
+}
+
+class Stest{ // addHospitals
+    public static void main(String[] args){
+        Slots slots[] = new Slots[2];
+        slots[0] = new Slots(121111, 1, 5, "Covax");
+        slots[1] = new Slots(212112, 2, 6, "Covi");
+
+        for (Slots i : slots) {
+            System.out.println(i);
+        }
+    }
+}
