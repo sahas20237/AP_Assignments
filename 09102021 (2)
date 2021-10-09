@@ -1,0 +1,108 @@
+class myMain{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Covin Portal initialized...");
+        System.out.println("------------------------");
+        System.out.println(
+        "1. Add Vaccine" + "\n" + 
+        "2. Register Hospital" + "\n" +
+        "3. Register Citizen" + "\n" +
+        "4. Add Slot for Vaccination" + "\n" +
+        "5. Book Slot for Vaccination" + "\n" +
+        "6. List all slots for a hospital "+ "\n" +
+        "7. Check Vaccination Status" + "\n" +
+        "8. Exit");
+        System.out.println("------------------------");
+
+        int numberofvacs = 0;
+        Vaccines vac[] = new Vaccines[10];
+
+        int numberofhos = 0;
+        Hospitals hos[] = new Hospitals[10];
+
+        int numberofcit = 0;
+        Citizens cit[] = new Citizens[10];
+
+        int numberofslo = 0;
+        Slots slo[] = new Slots[10];
+        System.out.println(numberofhos);
+
+        while (true){
+            int query = sc.nextInt();
+
+            if (query == 1){
+                vac[numberofvacs] = new Vaccines(sc.next(), sc.nextInt(), sc.nextInt());
+                System.out.println(vac[numberofvacs]);
+                numberofvacs += 1;
+            }
+
+            if (query == 2){
+                hos[numberofhos] = new Hospitals(sc.next(), sc.nextInt());
+                System.out.println(hos[numberofhos]);
+                numberofhos += 1;
+            }
+
+            if (query == 3){
+                String name = sc.next();
+                int age = sc.nextInt();
+                String aadhar = sc.next();
+                if (age > 18){
+                    cit[numberofcit] = new Citizens(name, age, aadhar);
+                    cit[numberofcit].status = "REGISTERED";
+                    System.out.println(cit[numberofcit]);
+                    numberofcit += 1;
+                } else{
+                    System.out.println("AGE BARRIER 18");
+                }
+            }
+
+            if (query == 4){
+                int hosID = sc.nextInt();
+                for (int i=0; i<numberofhos; i++){
+                    if (hos[i].ID == hosID){
+                        int numslots = sc.nextInt();
+                        for (int j=0; j<numslots; j++){ 
+                            int day = sc.nextInt();
+                            int quantity = sc.nextInt();
+                            int type = sc.nextInt(); // 0. Covax 1. Covi
+                            String vacc = "";
+                            if (type == 0){
+                                vacc = "Covax";
+                            } else{
+                                vacc = "Covi";
+                            }
+                            slo[numberofslo] = new Slots(hosID, day, quantity, vacc);
+                        }
+                    }
+                }
+            }
+
+            if (query == 6){
+                int hosID = sc.nextInt();
+                for (int i=0; i<numberofhos; i++){
+                    if (hos[i].ID == hosID){
+                        for (int j=0; j<numberofslo; j++){
+                            if (slo[j].ID == hosID){
+                                System.out.println();
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (query == 7){
+                String ID = sc.next();
+                for (int i=0; i<numberofcit; i++){
+                    if (cit[i].aadhar == ID){
+                        System.out.println(cit[i].status);
+                    }
+                }
+            }
+
+            if (query == 8){
+                break;
+            }
+        }
+        sc.close();
+    }
+}
