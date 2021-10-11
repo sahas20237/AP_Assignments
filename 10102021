@@ -1,0 +1,320 @@
+import java.util.Scanner;
+
+class Vaccines{
+    public String name;
+    public int doses;
+    public int gap;
+
+    public Vaccines(String name, int doses, int gap){
+        this.name = name;
+        this.doses = doses;
+        this.gap = gap;
+    }
+
+    public String toString(){
+        return "Vaccine Name: "+ name + "\s" + "Number of Doses: " + doses + "\s" + "Gap between Doses: "+ gap + "\n";
+    }
+}
+
+class Vtest{ // addVaccines
+    public static void main(String[] args){
+        Vaccines vac[] = new Vaccines[2];
+        vac[0] = new Vaccines("Covi", 2, 3);
+        vac[1] = new Vaccines("Covax", 1, 0);
+
+        for (Vaccines i : vac) {
+            System.out.println(i);
+        }
+    }
+}
+
+class Hospitals{
+    public String name;
+    public int pincode;
+    public int ID;
+
+    public Hospitals(String name, int pincode){
+        this.name = name;
+        this.pincode = pincode;
+        this.ID = 100000 + (int)(Math.random()*999999);
+    }
+
+    // public int makeID(){
+    //     ID = 100000 + (int)(Math.random()*999999);
+    //     return ID;
+    // }
+
+    public String toString(){
+        return "Allocated Hospital ID is " + ID + "\n" + "Hospital Name: "+ name + "\s" + "Pincode: " + pincode + "\s" + "Unique ID: "+ ID + "\n";
+    }
+}
+
+class Htest{ // addHospitals
+    public static void main(String[] args){
+        Hospitals hos[] = new Hospitals[2];
+        hos[0] = new Hospitals("Medistar", 110091);
+        hos[1] = new Hospitals("Apollo", 110016);
+
+        for (Hospitals i : hos) {
+            System.out.println(i);
+        }
+    }
+}
+
+class Citizens{
+    public String name;
+    public int age;
+    public String aadhar;
+    public String status;
+    public String vaccinetaken;
+
+    public Citizens(String name, int age, String aadhar){
+        this.name = name;
+        this.age = age;
+        this.aadhar = aadhar;
+    }
+
+    public String toString(){
+        return "REGISTERED" + "\n" + "Citizen Name: " + name + "\s" + "Age: " + age + "\s" + "Aadhar ID: " + aadhar;
+    }
+}
+
+class Ctest{ // addHospitals
+    public static void main(String[] args){
+        Citizens cit[] = new Citizens[2];
+        cit[0] = new Citizens("Arnav", 18, "123456789098");
+        cit[1] = new Citizens("Sahas", 19, "123456789012");
+
+        for (Citizens i : cit) {
+            System.out.println(i.age);
+        }
+    }
+}
+
+class Slots{
+    public int ID;
+    public int day;
+    public int quantity;
+    public String type;
+
+    public Slots(int ID, int day, int quantity, String type){
+        this.ID = ID;
+        this.day = day;
+        this.quantity = quantity;
+        this.type = type;
+    }
+
+    public String toString(){
+        return "Slots added by Hospital: " + ID + "\s" + "for Day: " + day + "\s" + "Quantity: "+ quantity + "\s" + "Vaccine: " + type;
+    }
+}
+
+class Stest{ // addHospitals
+    public static void main(String[] args){
+        Slots slots[] = new Slots[2];
+        // slots[0] = new Slots(121111, 1, 5, "Covax");
+        // slots[1] = new Slots(212112, 2, 6, "Covi");
+
+        for (Slots i : slots) {
+            System.out.println(i);
+        }
+    }
+}
+
+class myMain{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Covin Portal initialized...");
+        
+        int numberofvacs = 0;
+        Vaccines vac[] = new Vaccines[10];
+
+        int numberofhos = 0;
+        Hospitals hos[] = new Hospitals[10];
+
+        int numberofcit = 0;
+        Citizens cit[] = new Citizens[10];
+
+        int numberofslo = 0;
+        Slots slo[] = new Slots[10];
+
+        while (true){
+            System.out.println("------------------------");
+            System.out.println(
+            "1. Add Vaccine" + "\n" + 
+            "2. Register Hospital" + "\n" +
+            "3. Register Citizen" + "\n" +
+            "4. Add Slot for Vaccination" + "\n" +
+            "5. Book Slot for Vaccination" + "\n" +
+            "6. List all slots for a hospital "+ "\n" +
+            "7. Check Vaccination Status" + "\n" +
+            "8. Exit");
+            System.out.println("------------------------");
+
+            int query = sc.nextInt();
+
+            if (query == 1){
+                System.out.print("Vaccine Name: " ); String name = sc.next();
+                System.out.print("Number of Doses: " ); int doses = sc.nextInt();
+                System.out.print("Gap between Doses: " ); int gap = sc.nextInt();
+                vac[numberofvacs] = new Vaccines(name, doses, gap);
+                System.out.println(vac[numberofvacs]);
+                numberofvacs += 1;
+            }
+
+            if (query == 2){
+                System.out.print("Hospital Name: " ); String name = sc.next();
+                System.out.print("Pincode: " ); int pincode = sc.nextInt();
+                hos[numberofhos] = new Hospitals(name, pincode);
+                System.out.println(hos[numberofhos]);
+                numberofhos += 1;
+            }
+
+            if (query == 3){
+                System.out.print("Citizen Name: " ); String  name = sc.next();
+                System.out.print("Age: " ); int age = sc.nextInt();
+                System.out.print("Aadhar ID: " );  String aadhar = sc.next();
+                if (age > 18){
+                    cit[numberofcit] = new Citizens(name, age, aadhar);
+                    cit[numberofcit].status = "REGISTERED";
+                    System.out.println(cit[numberofcit]);
+                    numberofcit += 1;
+                } else{
+                    System.out.println("Only above 18 are allowed" + "\n");
+                }
+            }
+
+            if (query == 4){
+                System.out.print("Enter Hospital ID: "); int hosID = sc.nextInt();
+                for (int i=0; i<numberofhos; i++){
+                    if (hos[i].ID == hosID){
+                        System.out.print("Enter Number of Slots to be Added: "); int numslots = sc.nextInt();
+                        for (int j=0; j<numslots; j++){ 
+                            System.out.print("Enter Day Number: "); int day = sc.nextInt();
+                            System.out.print("Enter Quantity: "); int quantity = sc.nextInt();
+                            System.out.print("Select Vaccine: " + "\n"); 
+                            for (int k=0; k<numberofvacs; k++){
+                                System.out.println(k + ". " + vac[k].name);
+                            }
+                            int type = sc.nextInt();
+                            slo[numberofslo] = new Slots(hosID, day, quantity, vac[type].name);
+                            System.out.println(slo[numberofslo]);
+                            numberofslo += 1;
+                        }
+                    }
+                }
+            }
+
+            if (query == 5){
+                System.out.print("Enter Patient ID: "); String aadharID = sc.next();
+                System.out.println("1. Search by Pincode" + "\n" + "2. Search by Vaccine" + "\n" + "3. Exit");
+                System.out.print("Enter Option: "); int option = sc.nextInt();
+                if (option == 1){
+                    System.out.print("Enter Pincode: "); int pin = sc.nextInt();
+                    for (int i=0; i<numberofhos; i++){
+                        if (hos[i].pincode == pin){
+                            System.out.println("ID: " + hos[i].ID + "\s" + "Name: " + hos[i].name);
+                        }
+                    }
+                    boolean flag = true;
+                    int thatday;
+                    int thatquant;
+                    String thattype = "";
+                    System.out.print("Enter Hospital ID: "); int chosenhosID = sc.nextInt();
+                    for (int i=0; i<numberofslo; i++){
+                        if (slo[i].ID == chosenhosID){
+                            System.out.println(i + ". Day: " + slo[i].day + "\s" + "Available Quantity: " + slo[i].quantity + "\s" + "Vaccine: " + slo[i].type);
+                            thatday =  slo[i].day; thatquant = slo[i].quantity; thattype = slo[i].type;
+                        } else{
+                            System.out.println("NO SLOTS AVAILABLE");
+                            flag = false;
+                        }
+                    }
+                    // do status and vaccinetaken ifelse and day here ?????????????????????????????????????????????????
+                    if (flag == true){
+                        System.out.println("Choose Slot: "); int slot = sc.nextInt();
+                        // for (int i=0; i<numberofcit; i++){
+                        //     if (cit[i].aadhar == aadharID){
+                        //         cit[i].vaccinetaken = ""
+                        //     }
+                        // }
+                    }
+                    
+                }
+
+                if (option == 2){
+                    System.out.print("Enter Vaccine Name: "); String vacname = sc.next();
+                    for (int i=0; i<numberofslo; i++){
+                        if (slo[i].type == vacname){
+                            int thatID = slo[i].ID;
+                            String thatname = "";
+                            for (int j=0; j<numberofhos; j++){
+                                if (hos[j].ID == thatID){
+                                    thatname = hos[j].name;
+                                }
+                            }
+                            System.out.println("Hospital ID: " + thatID + "\s" + "Hospital Name: " + thatname);
+                        }
+                    }
+                    boolean flag = true;
+                    System.out.println("Enter Hospital ID: "); int chosenhosID = sc.nextInt();
+                    for (int i=0; i<numberofslo; i++){
+                        if (slo[i].ID == chosenhosID){
+                            System.out.println(i + ". Day: " + slo[i].day + "\s" + "Available Quantity: " + slo[i].quantity + "\s" + "Vaccine: " + slo[i].type);
+                        } else{
+                            System.out.println("NO SLOTS AVAILABLE");
+                            flag = false;
+                        }
+                    }
+                    if (flag == true){
+                        // System.out.println("Choose Slot: "); int slot = sc.nextInt();
+                    }
+                }
+
+                if (option == 3){
+                    break;
+                }
+            }
+
+            if (query == 6){
+                System.out.print("Enter Hospital Id: "); int hosID = sc.nextInt();
+                for (int i=0; i<numberofslo; i++){
+                    if (slo[i].ID == hosID){
+                        System.out.print("Day: " + slo[i].day + "\s"); 
+                        System.out.print("Vaccine: " +  slo[i].type + "\s");
+                        System.out.print("Available Quantity: " + slo[i].quantity + "\n");
+                    }
+                }
+            }
+
+            if (query == 7){
+                System.out.print("Enter Citizen ID: "); String aadharID = sc.next();
+                for (int i=0; i<numberofcit; i++){
+                    if (cit[i].aadhar == aadharID){
+                        System.out.println(cit[i].status);
+                        if (cit[i].status == "REGISTERED"){
+                            System.out.println("Status: REGISTERED");
+                        }
+                        if (cit[i].status == "PARTIALLY VACCINATED"){
+                            System.out.println("Status: PARTIALLY VACCINATED");
+                            System.out.print("Due date of Next Vaccination: "); // ???????????????????????????????????????
+                            System.out.println("Vaccine Administered: " + cit[i].vaccinetaken);
+                        }
+                        if (cit[i].status == "FULLY VACCINATED"){
+                            System.out.println("Status: FULLY VACCINATED");
+                            System.out.print("Last Date Vaccination: "); // ???????????????????????????????????????
+                            System.out.println("Vaccine Administered: " + cit[i].vaccinetaken);
+                        }
+                    } else{
+                        System.out.println("NOT REGISTERED");
+                    }
+                }
+            }
+
+            if (query == 8){
+                break;
+            }
+        }
+        sc.close();
+    }
+}
